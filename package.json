@@ -1,0 +1,19 @@
+{
+  "name": "puppeteer-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "state2": "node scripts/build.js -s 2 test/state2",
+    "state3": "node scripts/build.js -s 3 test/state3",
+    "clean": "rm -f output/*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^9.4.1",
+    "puppeteer": "^19.2.0"
+  }
+}

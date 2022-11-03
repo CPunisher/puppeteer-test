@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html>
+      <head>
+      <script>(function(){
+  const methods =[
+    'clear',
+    'count',
+    'debug',
+    'error',
+    'info',
+    'log',
+    'table',
+    'time',
+    'timeEnd',
+    'warn',
+  ];
+  const oldMethods = {};
+
+  if (window.console) {
+    methods.forEach(method => {
+      if(window.console[method] ){
+        oldMethods[method] = window.console[method];
+        window.console[method] = function(){
+          oldMethods[method].apply(console, arguments);
+          // 消息格式要匹配intercept.ts中的handleMessage消息格式
+          const data = {
+            msgType: "Eval",
+            data:  JSON.stringify([...arguments]),
+          }
+          window.parent.postMessage(data, '*')
+        }
+      }
+    })
+  }
+})()</script>
+      <head>
+   <meta/>
+   <style></style>
+   <script></script>
+   <link rel="" href="" />
+</head><title>GwJgGSvL</title>
+      
+      </head>
+      <body>
+            
+            <div id="app"></div>
+            <script type="module">import React, { useState, useCallback } from "https://pdn.zijieapi.com/esm/bv/react@17";
+import ReactDom from "https://pdn.zijieapi.com/esm/bv/react-dom@17";
+
+const Test = function () {
+  const [count, setCount] = useState(0);
+  const handleClick = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
+  return /*#__PURE__*/React.createElement("div", {
+    onClick: handleClick
+  }, "click me ", count);
+};
+
+ReactDom.render( /*#__PURE__*/React.createElement(Test, null), document.getElementById('app'));
+</script>
+          </body>
+    </html>
