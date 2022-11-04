@@ -1,10 +1,50 @@
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="renderer" content="webkit"><meta name="layoutmode" content="standard"><meta name="imagemode" content="force"><meta name="wap-font-scale" content="no"><meta name="format-detection" content="telephone=no"><title>WxGBOklf</title><link rel="icon" href="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fe4b1dda450a423693e69a0de95f1bd7~tplv-k3u1fbpfcp-zoom-1.image" type="image/png"><script>window.__publicUrl__ = '//lf3-cdn-tos.bytescm.com/obj/static/biz_platform/fe/tech_code_editor/';</script><script>!function(){"use strict";var n={},r={};function t(e){var o=r[e];if(void 0!==o)return o.exports;var i=r[e]={exports:{}};return n[e](i,i.exports,t),i.exports}t.m=n,function(){var n=[];t.O=function(r,e,o,i){if(!e){var u=1/0;for(l=0;l<n.length;l++){e=n[l][0],o=n[l][1],i=n[l][2];for(var f=!0,c=0;c<e.length;c++)(!1&i||u>=i)&&Object.keys(t.O).every((function(n){return t.O[n](e[c])}))?e.splice(c--,1):(f=!1,i<u&&(u=i));if(f){n.splice(l--,1);var a=o();void 0!==a&&(r=a)}}return r}i=i||0;for(var l=n.length;l>0&&n[l-1][2]>i;l--)n[l]=n[l-1];n[l]=[e,o,i]}}(),t.n=function(n){var r=n&&n.__esModule?function(){return n.default}:function(){return n};return t.d(r,{a:r}),r},t.d=function(n,r){for(var e in r)t.o(r,e)&&!t.o(n,e)&&Object.defineProperty(n,e,{enumerable:!0,get:r[e]})},t.g=function(){if("object"===typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(n){if("object"===typeof window)return window}}(),t.o=function(n,r){return Object.prototype.hasOwnProperty.call(n,r)},function(){var n={9629:0};t.O.j=function(r){return 0===n[r]};var r=function(r,e){var o,i,u=e[0],f=e[1],c=e[2],a=0;if(u.some((function(r){return 0!==n[r]}))){for(o in f)t.o(f,o)&&(t.m[o]=f[o]);if(c)var l=c(t)}for(r&&r(e);a<u.length;a++)i=u[a],t.o(n,i)&&n[i]&&n[i][0](),n[u[a]]=0;return t.O(l)},e=window.__LOADABLE_LOADED_CHUNKS__=window.__LOADABLE_LOADED_CHUNKS__||[];e.forEach(r.bind(null,0)),e.push=r.bind(null,e.push.bind(e))}()}();</script><script defer="defer" src="//lf3-cdn-tos.bytescm.com/obj/static/biz_platform/fe/tech_code_editor/static/js/7888.96653439.js"></script><script defer="defer" src="//lf3-cdn-tos.bytescm.com/obj/static/biz_platform/fe/tech_code_editor/static/js/7478.f33a4698.js"></script><script defer="defer" src="//lf3-cdn-tos.bytescm.com/obj/static/biz_platform/fe/tech_code_editor/static/js/preview.1cde25d2.js"></script><meta name="description" vmid="description" content=""><style data-preview="true"></style>
-   <meta>
+<!DOCTYPE html>
+    <html>
+      <head>
+      <script>(function(){
+  const methods =[
+    'clear',
+    'count',
+    'debug',
+    'error',
+    'info',
+    'log',
+    'table',
+    'time',
+    'timeEnd',
+    'warn',
+  ];
+  const oldMethods = {};
+
+  if (window.console) {
+    methods.forEach(method => {
+      if(window.console[method] ){
+        oldMethods[method] = window.console[method];
+        window.console[method] = function(){
+          oldMethods[method].apply(console, arguments);
+          // 消息格式要匹配intercept.ts中的handleMessage消息格式
+          const data = {
+            msgType: "Eval",
+            data:  JSON.stringify([...arguments]),
+          }
+          window.parent.postMessage(data, '*')
+        }
+      }
+    })
+  }
+})()</script>
+      <head>
+   <meta/>
    <style></style>
    <script></script>
-   <link rel="" href="">
-</head><body><div id="app"></div><script data-preview="true" type="module">var _jsxFileName = "";
-import React, { useState, useCallback } from "https://pdn.zijieapi.com/esm/bv/react@17";
+   <link rel="" href="" />
+</head><title>GwJgGSvL</title>
+      
+      </head>
+      <body>
+            
+            <div id="app"></div>
+            <script type="module">import React, { useState, useCallback } from "https://pdn.zijieapi.com/esm/bv/react@17";
 import ReactDom from "https://pdn.zijieapi.com/esm/bv/react-dom@17";
 
 const Test = function () {
@@ -13,21 +53,11 @@ const Test = function () {
     setCount(count + 1);
   }, [count]);
   return /*#__PURE__*/React.createElement("div", {
-    onClick: handleClick,
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 11,
-      columnNumber: 10
-    }
+    onClick: handleClick
   }, "click me ", count);
 };
 
-ReactDom.render( /*#__PURE__*/React.createElement(Test, {
-  __self: this,
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 14,
-    columnNumber: 17
-  }
-}), document.getElementById('app'));</script></body></html>
+ReactDom.render( /*#__PURE__*/React.createElement(Test, null), document.getElementById('app'));
+</script>
+          </body>
+    </html>
