@@ -20,8 +20,9 @@ const file = program.args[0];
     const readable = new Readable();
     readable.push(code);
     readable.push(null);
-    const screenshot = cp.spawn('node', ['scripts/screenshot.js', enableScript && '--script', '--time', '-o /tmp/example.png']);
+    const screenshot = cp.spawn('node', ['scripts/screenshot.js', enableScript && '--script', '--time', '-o', 'output/bench.png']);
     readable.pipe(screenshot.stdin);
+    screenshot.stderr.pipe(process.stdout);
     for await (const data of screenshot.stdout) {
       const [t1, t2] = parseTimeLog(data.toString());
       if (t1 && t2) {
