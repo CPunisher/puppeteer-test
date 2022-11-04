@@ -34,7 +34,7 @@ const pid = process.pid;
 
   log("Output file: " + outputFile);
   if (enableTime) {
-    log(`Total Elasped: ${et1 - st1}, Load Elasped: ${et2 - st2}`);
+    log(`Total Elapsed: ${et1 - st1}, Load Elapsed: ${et2 - st2}`);
   }
 })();
 
