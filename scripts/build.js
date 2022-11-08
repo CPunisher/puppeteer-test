@@ -1,21 +1,19 @@
 import fs from 'fs';
-import { program, Option } from 'commander';
+import { program } from 'commander';
 import path from 'path';
 import cp from 'child_process';
 
 program
   .argument('<dir>', 'Directory of input files')
-  .addOption(new Option('-s, --state <state>', 'Start State').choices(['2', '3']).default('3'))
+  .option('--script', 'Enable JavaScript', false)
 program.parse();
 
-const state = program.opts().state;
+const enableScript = program.opts().script;
 const dir = program.args[0];
 
 (async function() {
   const files = await fs.promises.readdir(dir);
 
-  console.log('Start State: ' + state);
-  const enableScript = state === '2'; 
   for (const file of files) {
     const filePath = path.resolve(dir, file);
     const saveFilePath = path.resolve('output', postfix(file, 'png'));
