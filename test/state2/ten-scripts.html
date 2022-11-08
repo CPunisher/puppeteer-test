@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+    <html>
+      <head>
+      <script>
+(function(){
+  const isDev = location.host.indexOf('code.juejin.cn') === -1;
+  if (typeof BigInt === 'function' && !BigInt.prototype.toJSON) {
+    BigInt.prototype.toJSON = function () {
+      return this + 'n';
+    };
+  }
+  // 解决 JSON.stringify 里有循环引用
+  const createCircularReplacer = () => {
+    const seen = new WeakSet();
+    return (key, value) => {
+      if (typeof value === 'object' && value !== null) {
+        if (seen.has(value)) {
+          return Object.prototype.toString.call(value);
+        }
+        seen.add(value);
+      }
+      return value;
+    };
+  };
+  function stringifyLog(...args) {
+    return args.map(arg => {
+      const prototypeString = Object.prototype.toString.call(arg);
+      try {
+        if (
+          arg &&
+          ['[object Object]', '[object Array]'].includes(prototypeString)
+        ) {
+          return JSON.stringify(arg, createCircularReplacer(), 2);
+          // arg 是基本类型
+        } else if (
+          arg === null ||
+          [
+            'string',
+            'boolean',
+            'number',
+            'symbol',
+            'undefined',
+            'bigint',
+          ].includes(typeof arg)
+        ) {
+          return String(arg);
+        } else if (arg?.toString) {
+          return arg.toString();
+        } else {
+          return prototypeString;
+        }
+      } catch (e) {
+        return prototypeString;
+      }
+    });
+  }
+  function stringifyError(error) {
+    if (!error) {
+      return '';
+    }
+    const stackInfo = error.stack?.toString() || '';
+    return stackInfo ? stackInfo : error.message+ '\n';
+  }
+  function sendMessage(type, ...args) {
+    if (window.parent !== window) {
+      window.parent.postMessage(
+        {
+          msgType: 'Console',
+          type,
+          value: stringifyLog(...args),
+          from: 'Runner'
+        },
+        isDev ? '*' : location.protocol + '//' + 'juejin-code-boe.bytedance.net'
+      );
+    }
+  }
+  function logWindowOnError(event) {
+    let msg = event.message;
+    if (event.filename) {
+      msg += event.filename.replace(location.origin, '');
+    }
+    if (event.lineno || event.colno) {
+      msg += ':'+ event.lineno+ ':' + event.colno;
+    }
+    sendMessage('error', msg, stringifyError(event.error));
+  }
+  function logResourceError(event) {
+    const { target } = event;
+    if (
+      target &&
+      ['link', 'video', 'script', 'img', 'audio'].includes(target.localName)
+    ) {
+      const src = target.href || target.src || target.currentSrc || '';
+      sendMessage('error', 'GET <'+ target.localName + '> error: '+ src);
+    }
+  }
+  function logUnhandledRejection(event) {
+    const error = event?.reason ? event.reason : event;
+    sendMessage('error', 'Uncaught (in promise) ', {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+    });
+  }
+  const handleConsoleMessage = (event) => {
+    const msg = event.data;
+    const expectedOrigin = location.protocol + '//' + 'juejin-code-boe.bytedance.net';
+    // 确保消息来源是代码编辑器的 origin
+    if (!isDev && event.origin !== expectedOrigin) {
+      console.error(
+        'event origin ' + event.origin + ' is different from expected:' + expectedOrigin,
+      );
+      return;
+    }
+    if (msg?.msgType === 'Eval') {
+      const cmd = msg.data || '';
+      let result;
+      try {
+        result = window.eval('(' + cmd + ')');
+      } catch (e) {
+        try {
+          result = window.eval(cmd);
+        } catch (error) {
+          sendMessage('error', stringifyError(error));
+        }
+      }
+      setTimeout(() => {
+        if (result) {
+          sendMessage('log', ...stringifyLog(result));
+        }
+      });
+    }
+  }
+  (() => {
+    const supportType = ['log', 'info', 'warn', 'error', 'table'];
+    const oldConsoleMethod = {};
+    supportType.forEach(key => {
+      oldConsoleMethod[key] = window.console[key];
+      window.console[key] = (...args) => {
+        sendMessage(key, ...args);
+        oldConsoleMethod[key](...args);
+      };
+    });
+
+    window.addEventListener('error', logWindowOnError, true);
+    window.addEventListener('error', logResourceError, true);
+    window.addEventListener('unhandledrejection', logUnhandledRejection);
+    window.addEventListener('message', handleConsoleMessage);
+  })();
+})();
+</script>
+      <head>
+   <meta/>
+   <style></style>
+   <script></script>
+   <link rel="" href="" />
+</head><title>hdWPLetp</title>
+      <script  type="importmap">{"imports":{"react":"https://pdn.zijieapi.com/esm/bv/react@17","react-dom":"https://pdn.zijieapi.com/esm/bv/react-dom@17","vue":"https://pdn.zijieapi.com/esm/bv/vue@latest","angular":"https://pdn.zijieapi.com/esm/bv/angular@latest","antd":"https://pdn.zijieapi.com/esm/bv/antd@latest","@arco-design/web-react":"https://pdn.zijieapi.com/esm/bv/@arco-design/web-react@latest","pinia":"https://pdn.zijieapi.com/esm/bv/pinia@latest","moment":"https://pdn.zijieapi.com/esm/bv/moment@latest","vue-router@4":"https://pdn.zijieapi.com/esm/bv/vue-router@4","react-router-dom":"https://pdn.zijieapi.com/esm/bv/react-router-dom@latest"},"scopes":{}}</script>
+      </head>
+      <body>
+            
+            <div id="app"></div>
+            <script type="module">import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as Vue from 'vue';
+import * as Angular from 'angular';
+import * as Antd from 'antd';
+import * as Arco from '@arco-design/web-react';
+import * as Pinia from 'pinia'
+import * as Moment from 'moment'
+import * as VueRouter from 'vue-router@4'
+import * as ReactRouter from 'react-router-dom'
+</script>
+          </body>
+    </html>
