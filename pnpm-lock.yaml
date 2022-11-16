@@ -2,10 +2,14 @@ lockfileVersion: 5.4
 
 specifiers:
   commander: ^9.4.1
+  pidtree: ^0.6.0
+  pidusage: ^3.0.2
   puppeteer: ^19.2.0
 
 dependencies:
   commander: 9.4.1
+  pidtree: 0.6.0
+  pidusage: 3.0.2
   puppeteer: 19.2.0
 
 packages:
@@ -348,6 +352,19 @@ packages:
 
   /pend/1.2.0:
     resolution: {integrity: sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==}
+    dev: false
+
+  /pidtree/0.6.0:
+    resolution: {integrity: sha512-eG2dWTVw5bzqGRztnHExczNxt5VGsE6OwTeCG3fdUf9KBsZzO3R5OIIIzWR+iZA0NtZ+RDVdaoE2dK1cn6jH4g==}
+    engines: {node: '>=0.10'}
+    hasBin: true
+    dev: false
+
+  /pidusage/3.0.2:
+    resolution: {integrity: sha512-g0VU+y08pKw5M8EZ2rIGiEBaB8wrQMjYGFfW2QVIfyT8V+fq8YFLkvlz4bz5ljvFDJYNFCWT3PWqcRr2FKO81w==}
+    engines: {node: '>=10'}
+    dependencies:
+      safe-buffer: 5.2.1
     dev: false
 
   /progress/2.0.3:

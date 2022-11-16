@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../styles/index.css">
+    <title>Chromium Page</title>
+  </head>
+  <body>
+    <script>
+      const arr = Array(1024 * 1024 * 1024).fill(0);
+      setInterval(() => {
+        for (let i = 0; i < arr.length; i++) {
+          arr[i] = i;
+        }
+      }, 100);
+    </script>
+  </body>
+</html>
