@@ -7,14 +7,20 @@ program
   .argument('<string>', 'Target url')
   .option('--interval <number>', 'Monitor interval in ms', 1000)
   .option('--duration <number>', 'Monitor duration in ms', 20000)
+  .option('--headers <headers>', 'Extra headers seperated by ","')
   .parse();
 
 const url = program.args[0];
-const { interval, duration } = program.opts();
+const { interval, duration, headers } = program.opts();
 (async () => { 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   const pid = browser.process().pid;
+  
+  if (headers) {
+    const extraHeaders = parseHeaders();
+    await page.setExtraHTTPHeaders(extraHeaders);
+  }
   await page.goto(url);
 
   const monitor = setInterval(async () => {
@@ -32,3 +38,13 @@ const { interval, duration } = program.opts();
     await browser.close();
   }, duration);
 })();
+
+function parseHeaders() {
+  const headerList = headers.split(',');
+  const result = {};
+  for (const header of headerList) {
+    const [k, v] = header.split('=');
+    result[k] = v;
+  }
+  return result;
+}
